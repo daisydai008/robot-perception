@@ -36,6 +36,16 @@ def parser():
     tags.add_argument("--config", required=True)
     tags.add_argument("--image", required=True)
     tags.add_argument("--output", required=True, help="New result directory")
+    reference = commands.add_parser("ee-reference", help="Offline URDF FK from recorded Tianji states; candidate T_base_ee only")
+    reference.add_argument("--urdf", required=True, help="Vendor .urdf or .zip read in place")
+    reference.add_argument("--urdf-member", help="Exact .urdf member in a zip; automatic only for a single URDF")
+    reference.add_argument("--base", required=True)
+    reference.add_argument("--ee", required=True)
+    reference.add_argument("--arm", choices=("left", "right"), required=True)
+    reference.add_argument("--samples", required=True, help="Text: one sample_id and pasted Tianji state line per image")
+    reference.add_argument("--out-dir", required=True, help="One exclusive-create sample_id.json per state; never overwrite")
+    reference.add_argument("--confirm-settled-same-pose", action="store_true",
+                           help="Confirm EVERY state was read while settled at the same pose as its frozen image")
     return root
 
 
@@ -77,6 +87,11 @@ def main(argv=None):
             from .offline import intrinsics
             result = intrinsics(args.config, config, args.manifest, args.output)
             print(json.dumps({key: result[key] for key in ("status", "train_summary", "heldout_summary")}, indent=2))
+        elif args.command == "ee-reference":
+            require(args.confirm_settled_same_pose, "ee-reference requires explicit --confirm-settled-same-pose")
+            from .urdf_fk import write_ee_references
+            count = write_ee_references(args)
+            print(f"{count} candidate references saved to {args.out_dir}; vendor URDF/robot conventions remain unverified")
         elif args.command == "detect-tags":
             config = load_config(args.config, "tags")
             from .offline import detect_tags

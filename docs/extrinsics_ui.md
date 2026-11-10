@@ -69,6 +69,28 @@ CameraInfo sidecar 是下面的对象；`image_header` 与 `camera_info.header` 
 
 此矩阵仅示意格式。Eye-to-hand 的 `from_frame` 应为设置中的 E frame；不能将 TCP、wrist 或法兰名字互换。
 
+### Eye-to-hand：由天机关节记录生成参照
+
+`robot-calibrate ee-reference` 是纯离线工具，不导入 `tianji_control`、不连接机器人。天机右臂使用 B=`base_link`、E=`Link7_R`（最后一个运动 link，不是 TCP）；UI 设置中的 frame 必须同名。板刚性安装到末端，安装变换 `T_E_Q` 仍作为未知量求解；厂商 TJ 夹爪与实机 Wuji 手的差异不参与这条 FK 链。
+
+1. 每次停稳并冻结图像后，在保持同一姿态时读取 `tianji_control` 的 `state`，将 UI 样本 ID 与完整状态输出存入文本，每行一个样本。例如：
+   ```text
+   000000 arm=right frame=123 mode_raw=0 commanded_state_raw=1 error_raw=0 position_degrees=[0, 0, 0, 0, 0, 0, 0]
+   ```
+   此处零角度仅为格式示例，不是建议运动目标。也接受带 `sample=N/M`、`counter=...` 的 CLI 输出；空行和以 `#` 开头的注释忽略。关节 1–7 顺序、单位 degrees；ID 不重复且仅用字母、数字、`_-.`（以字母或数字开头）。每条 `arm` 须匹配，若有 `error_raw` 必须为 0。
+2. 在确认**每条状态都对应已停稳的同一幅冻结图像**后运行：
+   ```bash
+   robot-calibrate ee-reference \
+     --urdf '/path/to/Marvin+pro_V3.0_M6_696_SHW5G_TJgripper+urdf.zip' \
+     --base base_link --ee Link7_R --arm right \
+     --samples /path/to/states.txt --out-dir /path/to/ee-references \
+     --confirm-settled-same-pose
+   ```
+   URDF 可为 `.urdf` 文件或原位读取的 zip（不解压、不复制厂商材料）；zip 有多个 URDF 时必须用 `--urdf-member` 指定。链须含恰好 7 个角度关节，按链顺序映射并记录 joint names，检查 URDF 限位。全部输入验证后才写 `<sample_id>.json`，已有文件绝不覆盖；I/O 中断可能留下部分文件，须人工核对。未传确认参数则拒绝写入，参数不能证明现场同步。
+3. UI 选中对应样本，核对并确认角点方向与 IPPE 候选后，点击“读入参照 JSON 文件”，再点“应用当前样本”；逐幅关联，不自动批量匹配。
+
+输出为米制 `T_B_E`，包含原始状态行、URDF 路径/member、XML 字节 SHA256 与 `fk_from_vendor_urdf_not_validated_against_robot` 来源状态。**FK 正确性依赖厂商 URDF 与实机一致，URDF 关节零位/正负号与 SDK 的约定尚未对机器人验证。** 限位检查与软件交叉验证不能证明这一点；生成的 JSON 仍只是候选参照输入，不代表物理标定通过。
+
 ## 离线验证
 
 ```bash

@@ -16,3 +16,17 @@ export FASTRTPS_DEFAULT_PROFILES_FILE="$ROBOT_PERCEPTION_REPO/config/cameras/d43
 ```
 
 Jetson 端的驱动与 DDS 配置保存在 Jetson 部署目录中，本目录没有复制。REGRIND 旧相机启动链的退役配置已按用户要求删除。迁移、删除记录和逐文件 hash 见 [provenance.json](../provenance.json) 的 `post_migration_changes`。
+
+## D435 彩色流：本仓库统一 848×480@30
+
+2026-11-10 起，按用户决定，本仓库的标定和感知统一使用 D435（SN 348122072721）彩色 848×480@30 rgb8。Jetson 部署配置不改，仍为 640×480@30。使用前在 workstation 上切换正在运行的驱动：
+
+```bash
+ros2 param set /cameras/d435 rgb_camera.color_profile 848x480x30
+ros2 param set /cameras/d435 enable_color false
+ros2 param set /cameras/d435 enable_color true
+```
+
+切换会影响这台相机的所有订阅者，切换前须确认 teleop 或数据采集没有在用。驱动重启后会恢复部署默认的 640×480。深度保持 640×480，align 关闭。
+
+实测 CameraInfo 为 plumb_bob、D 全 0，fx=603.646、fy=603.362、cx=430.930、cy=245.467，视野约 70.2°×43.4°，帧率 30.0 Hz。按厂家内参，640×480 模式只是把 cx 平移 104 px，等价于 848×480 的中间裁切。因此外参（相机位姿）对两种分辨率通用；内参和画面内的像素坐标须按实际分辨率取用。

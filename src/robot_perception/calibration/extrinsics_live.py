@@ -73,16 +73,20 @@ class LiveSource(threading.Thread):
         self.join()  # spin_once is bounded; destroy only this node/context.
 
     def run(self):
-        node = context = None
+        node = context = executor = None
         try:
             import rclpy
             from rclpy.context import Context
+            from rclpy.executors import SingleThreadedExecutor
             from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
             from sensor_msgs.msg import CameraInfo, Image
 
             context = Context()
             rclpy.init(args=[], context=context)
             node = rclpy.create_node("fixed_camera_extrinsics_preview", context=context)
+            # The node lives in a private context; the global executor belongs to the default context.
+            executor = SingleThreadedExecutor(context=context)
+            executor.add_node(node)
             matcher = RGBMatcher()
 
             def header(msg):
@@ -114,7 +118,7 @@ class LiveSource(threading.Thread):
             node.create_subscription(Image, "/cameras/d435/color/image_raw", on_image, qos)
             node.create_subscription(CameraInfo, "/cameras/d435/color/camera_info", on_info, qos)
             while not self.stop_event.is_set() and context.ok():
-                rclpy.spin_once(node, timeout_sec=0.05)
+                executor.spin_once(timeout_sec=0.05)
                 packet = matcher.pop()
                 if packet is not None:
                     with self.lock:
@@ -123,6 +127,8 @@ class LiveSource(threading.Thread):
             with self.lock:
                 self.error = f"ROS RGB 连接失败/停止: {exc}"
         finally:
+            if executor is not None:
+                executor.shutdown()
             if node is not None:
                 node.destroy_node()
             if context is not None and context.ok():

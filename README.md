@@ -29,13 +29,14 @@ robot-extrinsics-ui --help
 
 ```bash
 robot-calibrate --help
+robot-calibrate ee-reference --help
 python -m robot_perception --help
 python -m robot_perception.calibration.calibrate --help
 robot-extrinsics-ui
 python -m robot_perception.calibration.extrinsics_ui --session "$ROBOT_PERCEPTION_REPO/data/vision_calibration/<session>"
 ```
 
-`robot-calibrate` 保留 `check-config`、`capture`、`intrinsics`、`detect-tags` 的参数和错误码。唯一维护的 targets 模板随 package 安装；它包含未确认值，默认应被拒绝，不能作为实测配置直接使用。
+`robot-calibrate` 保留 `check-config`、`capture`、`intrinsics`、`detect-tags` 的参数和错误码；新增 `ee-reference`，从记录的天机关节角与厂商 URDF 离线生成 eye-to-hand 参照 JSON，不连接机器人，需显式确认停稳同姿态。用法与未验证实机零位/正负号的限制见[外参 UI 使用说明](docs/extrinsics_ui.md#eye-to-hand由天机关节记录生成参照)。唯一维护的 targets 模板随 package 安装；它包含未确认值，默认应被拒绝，不能作为实测配置直接使用。
 
 ```bash
 mkdir -p /tmp/robot-perception-local

@@ -77,6 +77,8 @@
 
 截至 2026-11-09，D435 已完成 Jetson 本地与 workstation 短时 RGB/native-depth 取流检查，稳定段约 30 Hz；收流记录保存在本仓库 `data/vision_calibration/`（只在本机，不随本包分发），workstation DDS profile 见 [config/](../config/README.md)。**物理内参、外参与时间精度尚未验收。** 板和 tags 已到位；标定板为 DFOPTIX `Q12-290-20` 普通棋盘，12×9 方格、11×8 内角点；用户已确认单格实测 20 mm，黑白格区域 240×180 mm、整板 290×230 mm。下一步是确定外部位姿参照与采集协议；量具和测量不确定度记录仍待补充。
 
+2026-11-10 起，本仓库的标定和感知按用户决定统一使用 D435 彩色 848×480@30，水平视野约 70°。Jetson 部署配置仍为 640×480，使用时在运行中切换，见[相机配置](../config/README.md)。同日完成实时检查：共 19 幅，全部检出 88 个角点，数据在 `data/vision_calibration/live_check_20261110_162316_n19`。厂家内参在画面中上部的重投影 RMS 约 0.1–0.3 px，下半部 0.5–1.1 px；画面左侧和四角未覆盖。用户决定外参标定采用厂家内参。这是诊断记录，不是正式内参验收。外参待棋盘刚性安装到末端后进行。
+
 现有 [标定 CLI](../src/robot_perception/calibration/calibrate.py)（`robot-calibrate`） 中，`intrinsics` 仅支持 ChArUco，`detect-tags` 仅输出检测角点；`capture` 要求 RGB、native depth、aligned depth 及逐帧匹配的 CameraInfo，alignment 关闭时不能直接使用。[固定相机外参 UI](extrinsics_ui.md)（`robot-extrinsics-ui`） 独立支持普通棋盘的 RGB-only 离线导入或显式订阅、已知板参照与 eye-to-hand 求解、train/heldout 验证和候选归档，不要求深度对齐。使用前仍需确认实测尺度、raw 模型、物理角点朝向及独立外部位姿；工具不控制机器人、不发布 TF、不改变驱动，候选输出不代替实装验收。
 
 本轮已批准阶段 A 的本地迁移与离线接入；此 package 仅实现上述流程中的部分软件工具，不宣称完成深度、时间或物理精度验收。当前授权与后续范围见[任务契约](task_brief.md)。
