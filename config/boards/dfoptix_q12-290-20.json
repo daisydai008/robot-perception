@@ -1,0 +1,47 @@
+{
+  "record_type": "physical_target_specification",
+  "schema_version": 1,
+  "board_label": "Q12-290-20",
+  "manufacturer_mark": "DFOPTIX",
+  "label_record": "2026-11-10: printed mark read as 'DFOPTIX Q12-290-20' in the board_diagnostic_20261109_210647 color images; the user checked the physical board and confirmed Q12-290-20.",
+  "previous_label": "Q12-12x9 (user description on 2026-11-09, not the printed model mark)",
+  "target_type": "checkerboard",
+  "source": "user_supplied_specification_in_conversation",
+  "recorded_on": "2026-11-10",
+  "units": "metres",
+  "paths_relative_to": "robot-perception repository root",
+  "squares_xy": [12, 9],
+  "inner_corners_xy": [11, 8],
+  "inner_corner_count": 88,
+  "square_length_m_specified": 0.02,
+  "pattern_size_xy_m_specified": [0.24, 0.18],
+  "outer_size_xy_m_specified": [0.29, 0.23],
+  "thickness_m_specified": 0.0032,
+  "size_record": "2026-11-10 user confirmation: black-and-white checker area 240 x 180 mm, whole board 290 x 230 mm. The user withdrew the earlier statement that the pattern is 290 x 230 mm.",
+  "independent_measurement": {
+    "status": "operator_confirmed_square_length",
+    "square_length_m": 0.02,
+    "square_length_x_m": null,
+    "square_length_y_m": null,
+    "uncertainty_m": null,
+    "instrument": null,
+    "record": "2026-11-09 user confirmation: 20 mm has been testified",
+    "note": "Operator confirms 20 mm spacing; separate x/y readings, instrument and uncertainty were not supplied."
+  },
+  "diagnostic_image_record": "data/vision_calibration/board_diagnostic_20261109_210647/detection_diagnostic.json",
+  "coordinate_convention": {
+    "origin": "first detected inner corner, not physical plate corner",
+    "x": "along detector corner rows, 11 points at specified 0.02 m spacing",
+    "y": "between detector corner rows, 8 points at specified 0.02 m spacing",
+    "z": "right-handed cross product of x and y",
+    "note": "Plain checkerboard is not an identity-coded target. Corner-origin orientation must be physically disambiguated across views before using poses for robot extrinsics. Thickness is not added to points on the printed pattern plane."
+  },
+  "status": "operator_confirmed_scale_not_calibration_approved",
+  "tool_compatibility": "Not a ChArUco configuration; do not pass this record to the ChArUco-only targets loader. The extrinsics UI does not read this file; cite its path in the measurement record field.",
+  "supersedes": {
+    "path": "data/vision_calibration/boards/Q12-12x9/specification.json",
+    "sha256": "e523f3d84e75ed945d2406f6642be001c795fff2420d38dbceb3110f34b35518",
+    "change": "board label corrected to the printed model mark; all numeric values unchanged",
+    "status": "removed on 2026-11-10 at the user's request; its numeric content is preserved in this record"
+  }
+}

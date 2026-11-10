@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "measurement_record": null,
+  "board": {
+    "delivery_confirmed": false,
+    "dictionary": "DICT_6X6_250",
+    "squares_x": 7,
+    "squares_y": 10,
+    "legacy_pattern": null,
+    "marker_ids": [100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134],
+    "square_length_m": null,
+    "marker_length_m": null,
+    "note": "Unconfirmed SMALL-board order reference only. Replace layout and IDs from delivered supplier source; lengths must be measured. IDs are in OpenCV board marker order."
+  },
+  "apriltags": {
+    "delivery_confirmed": false,
+    "dictionary": "DICT_APRILTAG_36h11",
+    "size_definition": "black_outer_border",
+    "side_lengths_m": {"0": null, "1": null},
+    "note": "One selected measured sticker size per ID per configuration; do not mix different-sized copies of the same ID."
+  },
+  "protocol": {
+    "approved_by": null,
+    "frozen_on": null,
+    "record": null,
+    "limits": {
+      "rgb_depth_pair_delta_ms": null,
+      "intrinsics_heldout_rms_px": null,
+      "independent_length_error_m": null,
+      "extrinsic_translation_error_m": null,
+      "extrinsic_rotation_error_deg": null,
+      "image_robot_time_error_ms": null
+    },
+    "note": "Worksheet only, not approved thresholds. Record full sampling plan, error definitions, exclusions and remaining quality limits in the linked protocol record before formal collection."
+  }
+}

@@ -1,0 +1,440 @@
+{
+  "schema_version": 1,
+  "source": {
+    "repository": "regrind-vision-deploy",
+    "branch": "docs/scissors-camera-perception",
+    "head": "b03026b860d941e78fb7c786111f9674e6cc4f4c",
+    "basis": "actual working-tree files, including untracked calibration code; not HEAD alone"
+  },
+  "license": {
+    "status": "unspecified; local migration authorized, publication license requires owner decision",
+    "third_party": "Dependencies only; no vendor source, vendor license, credentials or machine configuration copied"
+  },
+  "migrated_files": [
+    {
+      "path": "scripts/vision_calibration/README.md",
+      "sha256": "f18774afabf9d04e1851ca5b2e754790351acbeba516817df3897ccd311abe80",
+      "bytes": 7732,
+      "destination": "docs/extrinsics_ui.md"
+    },
+    {
+      "path": "scripts/vision_calibration/calibrate.py",
+      "sha256": "c952e79eefa10e6e2abad5470f316319abe84813b2e44acd283cf681072f11e1",
+      "bytes": 6144,
+      "destination": "src/robot_perception/calibration/calibrate.py"
+    },
+    {
+      "path": "scripts/vision_calibration/capture.py",
+      "sha256": "d03ab496bfac076781a07590fd35db6ed4b950bf06ba2bc79dffacec3662af1e",
+      "bytes": 13112,
+      "destination": "src/robot_perception/calibration/capture.py"
+    },
+    {
+      "path": "scripts/vision_calibration/common.py",
+      "sha256": "9f15d0a0f42ddbe9acd67922f74fdaf02ab7d337bc3f3f5c91362a8b3d281e60",
+      "bytes": 7712,
+      "destination": "src/robot_perception/calibration/common.py"
+    },
+    {
+      "path": "scripts/vision_calibration/extrinsics.py",
+      "sha256": "99845d5a0bf68648f28a23cedce100bec6569df174bfe9dcf370b017c122f4e3",
+      "bytes": 16822,
+      "destination": "src/robot_perception/calibration/extrinsics.py"
+    },
+    {
+      "path": "scripts/vision_calibration/extrinsics_live.py",
+      "sha256": "e69e4487dda37786d4b014402cf0ad2a85093419469fb8a59bef5887fb1933b1",
+      "bytes": 6459,
+      "destination": "src/robot_perception/calibration/extrinsics_live.py"
+    },
+    {
+      "path": "scripts/vision_calibration/extrinsics_session.py",
+      "sha256": "671098d3d1d5f0d076dde0008af25cf08bd883d972d0a0df21a94d391917d558",
+      "bytes": 14597,
+      "destination": "src/robot_perception/calibration/extrinsics_session.py"
+    },
+    {
+      "path": "scripts/vision_calibration/extrinsics_ui.py",
+      "sha256": "716ade3c817b030052aa7e81ae04d47422c73fcaa69d7587b0e4064f72f60ccf",
+      "bytes": 30581,
+      "destination": "src/robot_perception/calibration/extrinsics_ui.py"
+    },
+    {
+      "path": "scripts/vision_calibration/offline.py",
+      "sha256": "54fb2398c9fa6eb900555410f4d86c2ac6ea3cf2250006a4893ffcdd105a044a",
+      "bytes": 10548,
+      "destination": "src/robot_perception/calibration/offline.py"
+    },
+    {
+      "path": "scripts/vision_calibration/targets.example.json",
+      "sha256": "fa0e75e40b65252d5fb8de8e2b9610a29d7e461c2fe52aa90add182696cbdcb2",
+      "bytes": 1514,
+      "destination": "src/robot_perception/calibration/targets.example.json"
+    },
+    {
+      "path": "scripts/vision_calibration/tests/test_calibration.py",
+      "sha256": "5771ab0fb304adf8fb9bfe7a731163f70cdf2470cd056be3e9003308bff17268",
+      "bytes": 16482,
+      "destination": "tests/test_calibration.py"
+    },
+    {
+      "path": "scripts/vision_calibration/tests/test_extrinsics.py",
+      "sha256": "257e7b7ca5cdbd5fa9b5b53f8b0ed38d37501b18eee44a9804648ccab74ab969",
+      "bytes": 28487,
+      "destination": "tests/test_extrinsics.py"
+    },
+    {
+      "path": "REGRIND/docs/vision-deploy/calibration_workflow.md",
+      "sha256": "f01d495f35ef0ba708e9e190c17d8b22c2a3de4a3f8b80671d8ea8a3763d47c2",
+      "bytes": 8985,
+      "destination": "docs/calibration_workflow.md"
+    },
+    {
+      "path": "REGRIND/docs/vision-deploy/robot_perception_task_brief.md",
+      "sha256": "129af435a048939fdb3b12e3a5c912787e40d0a776e82bbd0a09d46f771755ed",
+      "bytes": 8205,
+      "destination": "docs/task_brief.md"
+    }
+  ],
+  "additional_implementation": {
+    "src/robot_perception/ui/_extrinsics_window.py": "Qt implementation from scripts/vision_calibration/extrinsics_ui.py; public entry wrapper defers Qt import"
+  },
+  "external_read_only_fixtures": [
+    {
+      "path": "data/vision_calibration/board_diagnostic_20261109_210647/color_00.png",
+      "sha256": "71aa2db94519915c9fffe351587319d36fbb8caced5155a29955613b5986cc6e",
+      "bytes": 295547
+    },
+    {
+      "path": "data/vision_calibration/board_diagnostic_20261109_210647/color_01.png",
+      "sha256": "fa0703a2fee5538efb0d7d6cb7f7f843384fb96387020f7e8a6d207cc0374dc0",
+      "bytes": 295701
+    },
+    {
+      "path": "data/vision_calibration/board_diagnostic_20261109_210647/color_02.png",
+      "sha256": "6649a6c9a250144125f39e612d54f6f0eb97a35107da1244385ca59122f3a505",
+      "bytes": 295257
+    },
+    {
+      "path": "data/vision_calibration/board_diagnostic_20261109_210647/snapshots.json",
+      "sha256": "4eab936cae9b2b685cec9a10670edf53f7965fe198708d57c00933ca52cfc7ce",
+      "bytes": 7534
+    },
+    {
+      "path": "data/vision_calibration/extrinsics_Q12_setup_20261109_214759/session.json",
+      "sha256": "9876fa4b0a7f90775b2acfcdb33f7359ec1d772517352d8fe394dc25a1c3ce94",
+      "bytes": 1156
+    }
+  ],
+  "preservation": "Source implementations/data stay in place. No raw data copied. Only imports, packaging/entry loading, test fixture paths and relocated documentation changed; geometry/data schemas/CLI parameters preserved.",
+  "post_migration_changes": [
+    {
+      "date": "2026-11-10",
+      "change": "old_implementation_removed_from_source",
+      "detail": "regrind-vision-deploy/scripts/vision_calibration (never committed) was deleted by the REGRIND session after it verified the migrated copies; this repository holds the only maintained copy."
+    },
+    {
+      "date": "2026-11-10",
+      "change": "camera_calibration_records_relocated",
+      "approved_by": "user",
+      "from": "regrind-vision-deploy/data/vision_calibration",
+      "to": {
+        "records": "data/vision_calibration",
+        "retired_configs": "config/retired/regrind_camera_bringup_20261110"
+      },
+      "method": "same-filesystem rename; sha256 of every file verified before and after; source directory removed",
+      "note": "data/ is local-only and ignored by git; external_read_only_fixtures paths now resolve relative to this repository root.",
+      "versioned_copy": {
+        "from": "data/vision_calibration/d435_dds_20261109_200102/dds_workstation.xml",
+        "to": "config/cameras/d435/fastdds_workstation.xml",
+        "sha256": "23c222b4dda65db8bfb9ff2da2c2fbb84b482f4151780365092af94be580b5e3"
+      },
+      "files": [
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/checkerboard_candidate.json",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/checkerboard_candidate.json",
+          "sha256": "2028d655e4299b40eca6a49ec66e50f537ce98986b3834a5eb68f2cb32003820",
+          "bytes": 6053
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/color_00.png",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/color_00.png",
+          "sha256": "71aa2db94519915c9fffe351587319d36fbb8caced5155a29955613b5986cc6e",
+          "bytes": 295547
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/color_00_corners_11x8.png",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/color_00_corners_11x8.png",
+          "sha256": "aa5aa3503e357d8c71dffcb3126fcfa22f3ee83a695f37b9985d3404db276ab0",
+          "bytes": 318452
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/color_00_factory_projection.png",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/color_00_factory_projection.png",
+          "sha256": "9dcd1e276a61eac457f753958892575414ffeffa8ed154c1e741450c4749adbd",
+          "bytes": 295211
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/color_01.png",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/color_01.png",
+          "sha256": "fa0703a2fee5538efb0d7d6cb7f7f843384fb96387020f7e8a6d207cc0374dc0",
+          "bytes": 295701
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/color_01_corners_11x8.png",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/color_01_corners_11x8.png",
+          "sha256": "f0a70c5143dcb978503606c25f86d67e1ad57ac81b8a7ff18c4ec79c155604d8",
+          "bytes": 318573
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/color_01_factory_projection.png",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/color_01_factory_projection.png",
+          "sha256": "707ca240696668bb74be382fcb491071816bc8ede6de9734318a8398cb24112a",
+          "bytes": 295412
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/color_02.png",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/color_02.png",
+          "sha256": "6649a6c9a250144125f39e612d54f6f0eb97a35107da1244385ca59122f3a505",
+          "bytes": 295257
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/color_02_corners_11x8.png",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/color_02_corners_11x8.png",
+          "sha256": "97531b29d307a39bcfd27b4dd2bed32c896ec079d0402f068f79071130bde884",
+          "bytes": 318099
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/color_02_factory_projection.png",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/color_02_factory_projection.png",
+          "sha256": "b9d7febe363465f37ca5a44fef38ae948e05a18968a95ce91d257c196795c1ba",
+          "bytes": 294936
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/depth_00.png",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/depth_00.png",
+          "sha256": "aabb617664f6eff63c3aa225a0bad4a592b4556ccdca74682410b919fcb40599",
+          "bytes": 111625
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/depth_01.png",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/depth_01.png",
+          "sha256": "14715a761a7f0dc3273740666c58c9cccbc2bf0e21326c0b8a3069270382ab5c",
+          "bytes": 111925
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/depth_02.png",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/depth_02.png",
+          "sha256": "e44e3e69cae1205c526cd3504fd51204e7b5954b6827a7e2fc2ee9cef33083d8",
+          "bytes": 111279
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/detection_diagnostic.json",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/detection_diagnostic.json",
+          "sha256": "98d320776db1566d700a1dd565c7743b34f4d53d0a9ba56490414cc1fa7a3c63",
+          "bytes": 4381
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/driver.log",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/driver.log",
+          "sha256": "c416735b329aa6e399f79201f15165545690c9fdeb45a5ac489bc33cfa063ee2",
+          "bytes": 6856
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/factory_model_diagnostic.json",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/factory_model_diagnostic.json",
+          "sha256": "a309ac916fbc8a2b5ec18a3db86e2c9634c8b2ae90b5c3889125d601768f594e",
+          "bytes": 3919
+        },
+        {
+          "path": "data/vision_calibration/board_diagnostic_20261109_210647/snapshots.json",
+          "original": "data/vision_calibration/board_diagnostic_20261109_210647/snapshots.json",
+          "sha256": "4eab936cae9b2b685cec9a10670edf53f7965fe198708d57c00933ca52cfc7ce",
+          "bytes": 7534
+        },
+        {
+          "path": "data/vision_calibration/boards/Q12-12x9/specification.json",
+          "original": "data/vision_calibration/boards/Q12-12x9/specification.json",
+          "sha256": "e523f3d84e75ed945d2406f6642be001c795fff2420d38dbceb3110f34b35518",
+          "bytes": 1755
+        },
+        {
+          "path": "data/vision_calibration/d435_access_20261109_182726/access_provenance.json",
+          "original": "data/vision_calibration/d435_access_20261109_182726/access_provenance.json",
+          "sha256": "18cf642bb9281a5e54a989f48ce6ebfb148f5f4b51e62e60f66d20953e695ed6",
+          "bytes": 504
+        },
+        {
+          "path": "data/vision_calibration/d435_access_20261109_182726/color.bin",
+          "original": "data/vision_calibration/d435_access_20261109_182726/color.bin",
+          "sha256": "01ff0af86a7e763622db0e16e1b38954689cb71ee06dbc3807772f46a156f0b7",
+          "bytes": 921600
+        },
+        {
+          "path": "data/vision_calibration/d435_access_20261109_182726/color.png",
+          "original": "data/vision_calibration/d435_access_20261109_182726/color.png",
+          "sha256": "a68278f9d8cc61b32b8ba4c1886493ffc5d3eaab3105b9be9a21275d8dea5753",
+          "bytes": 286408
+        },
+        {
+          "path": "data/vision_calibration/d435_access_20261109_182726/depth.bin",
+          "original": "data/vision_calibration/d435_access_20261109_182726/depth.bin",
+          "sha256": "7b6558661c37d01abd4867ce93d842d436194852172bdf900c635e549e9e766c",
+          "bytes": 614400
+        },
+        {
+          "path": "data/vision_calibration/d435_access_20261109_182726/depth_uint16.png",
+          "original": "data/vision_calibration/d435_access_20261109_182726/depth_uint16.png",
+          "sha256": "3e26a82e14c62e20bc4a4eea6894e7e39520d8e95cc896f2dbeeeb9fe7fb059d",
+          "bytes": 113695
+        },
+        {
+          "path": "data/vision_calibration/d435_access_20261109_182726/driver.log",
+          "original": "data/vision_calibration/d435_access_20261109_182726/driver.log",
+          "sha256": "ed92d46867cd2c202ddc38317fa4dbef7ad9e99607ca89ae6d74dbdf87d57e87",
+          "bytes": 6699
+        },
+        {
+          "path": "data/vision_calibration/d435_access_20261109_182726/probe.json",
+          "original": "data/vision_calibration/d435_access_20261109_182726/probe.json",
+          "sha256": "dbe6733eff9759c31b3783cd719c180d88fde4a970961d7e3abfc02dd398c841",
+          "bytes": 7434
+        },
+        {
+          "path": "data/vision_calibration/d435_dds_20261109_200102/color.bin",
+          "original": "data/vision_calibration/d435_dds_20261109_200102/color.bin",
+          "sha256": "922a33904c20331b24caf6439eef0f59ff6b775d92af1d873299c062781f6f1e",
+          "bytes": 921600
+        },
+        {
+          "path": "data/vision_calibration/d435_dds_20261109_200102/color.png",
+          "original": "data/vision_calibration/d435_dds_20261109_200102/color.png",
+          "sha256": "405117057bc73bc1e689885bcc33d007e6aa4937e10c1711b2b7141a6c73ca40",
+          "bytes": 292680
+        },
+        {
+          "path": "data/vision_calibration/d435_dds_20261109_200102/dds_workstation.xml",
+          "original": "data/vision_calibration/d435_dds_20261109_200102/dds_workstation.xml",
+          "sha256": "23c222b4dda65db8bfb9ff2da2c2fbb84b482f4151780365092af94be580b5e3",
+          "bytes": 1315
+        },
+        {
+          "path": "data/vision_calibration/d435_dds_20261109_200102/depth.bin",
+          "original": "data/vision_calibration/d435_dds_20261109_200102/depth.bin",
+          "sha256": "56ced7fb000a07d83edec32a8b145bf0c0987cf217d1338acf2557153043ec4d",
+          "bytes": 614400
+        },
+        {
+          "path": "data/vision_calibration/d435_dds_20261109_200102/depth_uint16.png",
+          "original": "data/vision_calibration/d435_dds_20261109_200102/depth_uint16.png",
+          "sha256": "5b367df29dd40d36d61df3ca96e17429238d69d1b387c61b784d734572b53354",
+          "bytes": 113715
+        },
+        {
+          "path": "data/vision_calibration/d435_dds_20261109_200102/packets.txt",
+          "original": "data/vision_calibration/d435_dds_20261109_200102/packets.txt",
+          "sha256": "1e5318cddffadda9670752f415855d47993200e4612e785946fac85de127ce04",
+          "bytes": 2500
+        },
+        {
+          "path": "data/vision_calibration/d435_dds_20261109_200102/remote_driver.log",
+          "original": "data/vision_calibration/d435_dds_20261109_200102/remote_driver.log",
+          "sha256": "e8fd203b9f70c64b6d778d7d3a173b084b589b246cea65424753d5ba2c9fb66f",
+          "bytes": 7529
+        },
+        {
+          "path": "data/vision_calibration/d435_dds_20261109_200102/subscriber.json",
+          "original": "data/vision_calibration/d435_dds_20261109_200102/subscriber.json",
+          "sha256": "a93ea4c3cf1149813505b981b9e94d4520463a50bc6c0f15012f5d270d2533fa",
+          "bytes": 3334
+        },
+        {
+          "path": "data/vision_calibration/d435_dds_20261109_200102/subscriber.log",
+          "original": "data/vision_calibration/d435_dds_20261109_200102/subscriber.log",
+          "sha256": "be90f0b82dff6d8af2a4ae5da2795241ab411a6f02e4d4fa1c73c8f90f0e43d6",
+          "bytes": 3335
+        },
+        {
+          "path": "data/vision_calibration/extrinsics_Q12_setup_20261109_214759/session.json",
+          "original": "data/vision_calibration/extrinsics_Q12_setup_20261109_214759/session.json",
+          "sha256": "9876fa4b0a7f90775b2acfcdb33f7359ec1d772517352d8fe394dc25a1c3ce94",
+          "bytes": 1156
+        },
+        {
+          "path": "data/vision_calibration/extrinsics_Q12_setup_20261109_214759/ui_offline_preview.png",
+          "original": "data/vision_calibration/extrinsics_Q12_setup_20261109_214759/ui_offline_preview.png",
+          "sha256": "38d6e5d468b9db7f069637d9017c1b15a51e5cb41bf67710e4dfee70468396be",
+          "bytes": 263025
+        },
+        {
+          "path": "config/retired/regrind_camera_bringup_20261110/archive.json",
+          "original": "data/vision_calibration/retired_camera_config_20261110/archive.json",
+          "sha256": "4f0517c526b3b963c68e660c4c5a30a7070b91c01dfb2a96cc805ce955669c69",
+          "bytes": 1449
+        },
+        {
+          "path": "config/retired/regrind_camera_bringup_20261110/cameras.yaml",
+          "original": "data/vision_calibration/retired_camera_config_20261110/cameras.yaml",
+          "sha256": "4fdf6e717566b2830a31c923f0121417476e28aa1526c5cdbb69304b31335f41",
+          "bytes": 458
+        },
+        {
+          "path": "config/retired/regrind_camera_bringup_20261110/cameras.yaml.template",
+          "original": "data/vision_calibration/retired_camera_config_20261110/cameras.yaml.template",
+          "sha256": "4fdf6e717566b2830a31c923f0121417476e28aa1526c5cdbb69304b31335f41",
+          "bytes": 458
+        },
+        {
+          "path": "config/retired/regrind_camera_bringup_20261110/fastdds.xml",
+          "original": "data/vision_calibration/retired_camera_config_20261110/fastdds.xml",
+          "sha256": "a4b5378209489df50ed8568c6c1424b7ba96988a9347d2a22a2a2bcd31fc523b",
+          "bytes": 950
+        },
+        {
+          "path": "config/retired/regrind_camera_bringup_20261110/tianji_d435_extrinsics.yaml",
+          "original": "data/vision_calibration/retired_camera_config_20261110/tianji_d435_extrinsics.yaml",
+          "sha256": "18e1e797f7d23f47f5fdbad51f2db59b2ae4f446157923de1b89c7ce9aef11f0",
+          "bytes": 1200
+        }
+      ]
+    },
+    {
+      "date": "2026-11-10",
+      "change": "retired_and_superseded_configs_removed",
+      "approved_by": "user",
+      "detail": "Deleted the retired REGRIND camera bring-up configs and the superseded Q12-12x9 board record; the candidate mechanical transform remains documented in docs/camera_extrinsic_calibration_options.md and the board values in config/boards/dfoptix_q12-290-20.json.",
+      "removed": [
+        {
+          "path": "config/retired/regrind_camera_bringup_20261110/archive.json",
+          "sha256": "4f0517c526b3b963c68e660c4c5a30a7070b91c01dfb2a96cc805ce955669c69",
+          "bytes": 1449
+        },
+        {
+          "path": "config/retired/regrind_camera_bringup_20261110/cameras.yaml",
+          "sha256": "4fdf6e717566b2830a31c923f0121417476e28aa1526c5cdbb69304b31335f41",
+          "bytes": 458
+        },
+        {
+          "path": "config/retired/regrind_camera_bringup_20261110/cameras.yaml.template",
+          "sha256": "4fdf6e717566b2830a31c923f0121417476e28aa1526c5cdbb69304b31335f41",
+          "bytes": 458
+        },
+        {
+          "path": "config/retired/regrind_camera_bringup_20261110/fastdds.xml",
+          "sha256": "a4b5378209489df50ed8568c6c1424b7ba96988a9347d2a22a2a2bcd31fc523b",
+          "bytes": 950
+        },
+        {
+          "path": "config/retired/regrind_camera_bringup_20261110/tianji_d435_extrinsics.yaml",
+          "sha256": "18e1e797f7d23f47f5fdbad51f2db59b2ae4f446157923de1b89c7ce9aef11f0",
+          "bytes": 1200
+        },
+        {
+          "path": "data/vision_calibration/boards/Q12-12x9/specification.json",
+          "sha256": "e523f3d84e75ed945d2406f6642be001c795fff2420d38dbceb3110f34b35518",
+          "bytes": 1755
+        }
+      ]
+    }
+  ]
+}

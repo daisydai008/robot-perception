@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+# Local-only calibration records (data/), outputs, models and machine-local files.
+# Versioned camera, board and DDS configuration lives in config/.
+/data/
+/sessions/
+/results/
+/models/
+/local/
+*.bag
+*.db3
+*.mcap
+*.onnx
+*.pt
+.env
+.env.*
