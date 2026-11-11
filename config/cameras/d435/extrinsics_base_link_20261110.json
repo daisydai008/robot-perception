@@ -1,0 +1,378 @@
+{
+  "record_type": "camera_extrinsics",
+  "schema_version": 2,
+  "status": "approved_by_user_limited_scope",
+  "approved": {
+    "by": "user",
+    "on": "2026-11-10",
+    "criterion": "agreed beforehand: arm overlay visually aligned, and the native-depth camera correction <= 5 mm and <= 1 deg",
+    "outcome": "overlay judged aligned by the user; correction 4.33 mm / 0.58 deg, not applied"
+  },
+  "camera": {
+    "model": "Intel RealSense D435",
+    "serial": "348122072721",
+    "mount": "original Tianji head bracket, unmodified (user-confirmed); head fixed",
+    "driver": "realsense2_camera 4.58.4 on the Jetson"
+  },
+  "units": "m",
+  "convention": "T_A_B maps coordinates in frame B into frame A; optical frames are x right, y down, z forward",
+  "transforms": [
+    {
+      "from_frame": "d435_color_optical_frame",
+      "to_frame": "base_link",
+      "matrix": [
+        [
+          -0.9999534542,
+          0.0055597677,
+          -0.0078853348,
+          0.0325444889
+        ],
+        [
+          0.0083968842,
+          0.9040110607,
+          -0.4274265953,
+          -0.1019337184
+        ],
+        [
+          0.0047520373,
+          -0.4274729127,
+          -0.9040156675,
+          1.2502261587
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "translation_m": [
+        0.032544,
+        -0.101934,
+        1.250226
+      ],
+      "quaternion_xyzw": [
+        0.0035761,
+        0.9757023,
+        -0.2190472,
+        -0.003238
+      ],
+      "rpy_rad_urdf_fixed_axis": [
+        -2.6998918,
+        -0.0047521,
+        3.1331956
+      ]
+    },
+    {
+      "from_frame": "d435_link",
+      "to_frame": "base_link",
+      "matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0175
+        ],
+        [
+          -0.4226182617,
+          0.0,
+          -0.906307787,
+          -0.1015777002
+        ],
+        [
+          -0.906307787,
+          0.0,
+          0.4226182617,
+          1.2500335281
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "translation_m": [
+        0.0175,
+        -0.101578,
+        1.250034
+      ],
+      "quaternion_xyzw": [
+        -0.3799282,
+        -0.3799282,
+        0.5963678,
+        -0.5963678
+      ],
+      "rpy_rad_urdf_fixed_axis": [
+        0.0,
+        1.134464,
+        -1.5707963
+      ]
+    }
+  ],
+  "summary": {
+    "camera_position_in_base_m": [
+      0.0325,
+      -0.1019,
+      1.2502
+    ],
+    "optical_axis_in_base": [
+      -0.0079,
+      -0.4274,
+      -0.904
+    ],
+    "optical_axis_from_straight_down_deg": 25.31
+  },
+  "applies_to": {
+    "color": "848x480@30 rgb8 (this repository); 640x480 has the same pose, its factory intrinsics differ only by cx (-104 px)",
+    "use": "head fixed, static use; image-to-robot time synchronisation not covered"
+  },
+  "method": {
+    "description": "Composition of published geometry, no fitting: T_base_color = T_base_head * T_head_link * T_link_color.",
+    "base_link<-Head depth_Link": {
+      "source": "vendor URDF fixed joint \"Head depth_Joint\"",
+      "xyz_m": [
+        0.0,
+        -0.103394958759943,
+        1.24613640461494
+      ],
+      "rpy_rad": [
+        1.13446401379639,
+        0.0,
+        0.0
+      ],
+      "urdf": "Marvin pro_V3.0_M6_696_SHW5G_TJgripper.urdf (robot Pro-m6-696)",
+      "urdf_xml_sha256": "299d8b812d0e042b6334bd125ff085074cdc9835d19a89cfaf4b45454a6fff60"
+    },
+    "Head depth_Link<-d435_link": {
+      "source": "Intel realsense-ros 4.58.4 _d435.urdf.xacro: d435_link at the depth origin, 17.5 mm from the case centre along the long axis and 4.3 mm behind the front glass; case orientation from registering Intel d435.dae to the vendor mesh \"Head depth_Link.STL\" (median surface gap 0.4-0.6 mm; front face = link y=0, outward -y)",
+      "matrix": [
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0175
+        ],
+        [
+          -1.0,
+          0.0,
+          0.0,
+          0.0043
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "intel_files_sha256": {
+        "_d435.urdf.xacro": "ae3f57e8d38b3a6d5cc9de059e4afe545e4b895717d638b75d2ad0642cfb7f1b",
+        "d435.dae": "42f3b66f47a1f8f425a2e4dc07c1d9c283183167d8441f520a15623d98f9bf78"
+      },
+      "intel_source": "https://github.com/IntelRealSense/realsense-ros/tree/4.58.4/realsense2_description (Apache-2.0)"
+    },
+    "d435_link<-d435_color_optical_frame": {
+      "source": "D435 driver /tf_static (factory calibration), read 2026-11-10",
+      "d435_link->d435_color_frame": {
+        "translation_m": [
+          -2.412286812614184e-05,
+          0.015044488944113255,
+          0.00040407126653008163
+        ],
+        "rotation_xyzw": [
+          0.0027904503513127565,
+          -0.0026742827612906694,
+          -0.003935264889150858,
+          0.9999848008155823
+        ]
+      },
+      "d435_color_frame->d435_color_optical_frame": {
+        "translation_m": [
+          0.0,
+          -0.0,
+          -0.0
+        ],
+        "rotation_xyzw": [
+          -0.5,
+          0.4999999999999999,
+          -0.5,
+          0.5000000000000001
+        ]
+      },
+      "summary": "colour lens 15.04 mm along +y of d435_link (0.4 mm along z), rotated 0.63 deg relative to the depth origin"
+    },
+    "intrinsics": {
+      "source": "factory CameraInfo, color 848x480: fx 603.646, fy 603.362, cx 430.930, cy 245.467, plumb_bob, D=0",
+      "check": "19 hand-held checkerboard views (DFOPTIX Q12-290-20, 11x8 inner corners, 20 mm), all 88 corners detected; per-view IPPE PnP RMS with factory K: 11 views 0.16-0.30 px (board in the upper/central image, 0.56-0.73 m), 8 views 0.42-1.14 px (mostly lower half or nearer, 0.51-0.61 m), largest single-corner error 3.0 px; corners covered x 177-713 / 848 px and y 18-457 / 480 px (left third and image corners not covered). A diagnostic distortion refit from the other views lowered the held-out mean RMS from 0.44 to 0.29 px but was not adopted because coverage was insufficient. Decision by the user: use factory intrinsics."
+    },
+    "rounding_note": "The arm check ran on the same chain with the driver TF rounded to 4-5 decimals; the exact composition recorded here differs from it by 0.007 mm / 0.005 deg."
+  },
+  "validation": {
+    "fk_consistency": {
+      "compared": "vendor URDF FK (robot_perception.calibration.urdf_fk) vs Tianji libKine (wuji-hand-teleop tianji_kinematics, ccs_m6.MvKDCfg)",
+      "configurations_per_arm": 151,
+      "max_residual_mm": 0.0055,
+      "max_residual_deg": 0.0016,
+      "flange": "SDK flange = URDF TCP_Link (JointTCP, 95 mm from Link7); teleop TCP = flange + 70 mm along flange +Z"
+    },
+    "arm_overlay_native_depth": {
+      "tool": "robot-calibrate rgbd-snapshot + arm-check (default parameters)",
+      "pose": "first check, 2026-11-10 19:51: one static pose, both arms at home",
+      "joint_degrees": {
+        "left": [
+          55.0,
+          -65.0,
+          -69.999,
+          -59.997,
+          60.0,
+          0.003,
+          0.0
+        ],
+        "right": [
+          -55.003,
+          -65.001,
+          70.0,
+          -59.998,
+          -60.001,
+          -0.002,
+          -0.001
+        ]
+      },
+      "state_read": "tianji_control state (read-only) before and after the snapshot, identical within 1e-4 deg",
+      "snapshot": "30 colour frames 848x480 + 30 native depth frames 640x480 (depth unit 0.001 m), per-pixel median depth",
+      "links_compared": "Link1-Link7 of both arms (hands excluded: the URDF has a TJ gripper, the robot a Wuji hand)",
+      "depth_points": {
+        "left": 22451,
+        "right": 25522
+      },
+      "distance_to_arm_model_mm": {
+        "left": {
+          "median": 2.49,
+          "p90": 8.33,
+          "p95": 10.13,
+          "signed_mean": 2.61
+        },
+        "right": {
+          "median": 5.06,
+          "p90": 7.63,
+          "p95": 8.39,
+          "signed_mean": 4.43
+        }
+      },
+      "icp_camera_correction": {
+        "translation_mm": 4.33,
+        "rotation_deg": 0.58,
+        "applied": false,
+        "translation_mm_color_optical_xyz": [
+          1.81,
+          3.19,
+          2.31
+        ]
+      },
+      "leave_one_arm_out": {
+        "left": {
+          "median_before_mm": 2.84,
+          "median_after_mm": 6.64
+        },
+        "right": {
+          "median_before_mm": 5.25,
+          "median_after_mm": 7.27
+        }
+      },
+      "leave_one_arm_out_note": "a correction fitted on one arm made the other arm worse, so no correction is adopted",
+      "signed_mean_note": "signed mean > 0: depth points on the camera side of the model surface (vendor STL normals verified outward)"
+    },
+    "arm_overlay_native_depth_recheck": {
+      "pose": "second static pose, 2026-11-10 21:02 (J3 ~17 deg, J6 ~16 deg, J5 ~7 deg from home)",
+      "joint_degrees": {
+        "left": [
+          51.458,
+          -67.355,
+          -53.295,
+          -64.4,
+          53.218,
+          16.084,
+          0.599
+        ],
+        "right": [
+          -51.46,
+          -67.356,
+          53.297,
+          -64.399,
+          -53.22,
+          16.077,
+          -0.599
+        ]
+      },
+      "static_check": "tianji_control state (read-only, motion_authorized=false) before and after the snapshot; max joint change 0.00004 deg; error_raw 0",
+      "camera_pose": "this record, unchanged",
+      "distance_to_arm_model_mm": {
+        "left": {
+          "median": 3.46,
+          "p90": 8.45,
+          "p95": 9.19,
+          "depth_points": 33719,
+          "signed_mean": 3.16
+        },
+        "right": {
+          "median": 4.2,
+          "p90": 6.82,
+          "p95": 7.8,
+          "depth_points": 38565,
+          "signed_mean": 3.74
+        }
+      },
+      "icp_camera_correction": {
+        "translation_mm": 5.11,
+        "rotation_deg": 0.53,
+        "translation_mm_color_optical_xyz": [
+          0.38,
+          2.75,
+          4.28
+        ],
+        "applied": false
+      },
+      "leave_one_arm_out_median_mm_before_after": {
+        "left": [
+          3.59,
+          6.39
+        ],
+        "right": [
+          4.31,
+          5.21
+        ]
+      },
+      "verdict": "passed: overlay judged aligned by the user; correction 5.11 mm is 0.11 mm above the 5 mm used for the first approval and again does not transfer between arms",
+      "evidence": "data/vision_calibration/extrinsics_recheck_20261110_2102/ (local, git-ignored)",
+      "record_json_sha256": "0b5a33535bcae5caff76da1cfa1e19938496819e911d98e9f561ee7fa4277a76"
+    }
+  },
+  "limitations": [
+    "Validated on two static poses (home, and a second pose at 21:02); in both the arms lie near the left/right image edges and the image centre is not covered.",
+    "No independent metrological reference; agreement with the arm model is at the few-mm level.",
+    "In both checks the measured arm surface lies about 3-4 mm closer to the camera than the model on both arms (signed means +2.6 to +4.4 mm; vendor STL normals verified outward), and both fitted corrections include a forward translation along the optical axis (2.3 mm and 4.3 mm) consistent with that offset; this may be D435 depth bias or covers/cables thicker than CAD and cannot be separated from a camera offset along the optical axis with this method.",
+    "Depth unit 0.001 m taken from the realsense-ros 16UC1 convention, not measured independently.",
+    "Viewing angle to the table: 25.3 deg predicted vs 22.6 deg measured; the arm check does not support a camera error of this size; table/base parallelism unverified.",
+    "Re-check after any change of head, bracket, camera, URDF or driver; time synchronisation not validated."
+  ],
+  "evidence": {
+    "note": "Intermediate evidence (snapshot, overlay images, arm_check.json, candidate files, Intel model download, live-check session) deleted on 2026-11-10 at the user's request; key numbers are copied above. The 21:02 recheck record is kept in data/vision_calibration/extrinsics_recheck_20261110_2102/ (local, git-ignored).",
+    "sha256": {
+      "arm_check.json": "3cd23bbe6c731cb2767d78e527bd96a450d381a5eff845ec811ddc0be7ccc853",
+      "pose_01/snapshot.json": "28689c4cf207e2672776aa70e5e2b1fbf07f840e01660f836295ffce6fb8f8a9",
+      "states.txt": "c9dc0d81ac7350335b84d7e46f329893b03cb92e325b03ec081015287b293729",
+      "urdf_extrinsics_check.json": "ddaf8166655461722469c22d9a7cb8f2dcd9b0db7e666740541d27573b9dcd31",
+      "camera_pose_urdf_candidate.json": "8135e95e4d7c30f4d9992b4cb4257888f65f20f26e7a5d756c87a68733ad6aaa",
+      "live_check_20261110_162316_n19_summary.json": "d63eb7a296e1145445a3065ca922eb8561c8a30b108312093803815d12b369ad"
+    }
+  },
+  "ros_static_tf_hint": "ros2 run tf2_ros static_transform_publisher --x 0.017500 --y -0.101578 --z 1.250034 --qx -0.3799282 --qy -0.3799282 --qz 0.5963678 --qw -0.5963678 --frame-id base_link --child-frame-id d435_link",
+  "documentation": "docs/calibration_workflow.md"
+}

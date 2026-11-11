@@ -435,6 +435,119 @@
           "bytes": 1755
         }
       ]
+    },
+    {
+      "date": "2026-11-10",
+      "change": "intermediate_artifacts_removed_after_extrinsics",
+      "approved_by": "user",
+      "detail": "After the head D435 extrinsics were approved, intermediate artifacts were removed and the docs rewritten to record only the method used. The approved result and its key evidence numbers are kept in config/cameras/d435/extrinsics_base_link_20261110.json; the method is in docs/calibration_workflow.md.",
+      "removed_migrated_records": {
+        "files_verified_unchanged": 16,
+        "paths": [
+          "data/vision_calibration/d435_access_20261109_182726/access_provenance.json",
+          "data/vision_calibration/d435_access_20261109_182726/color.bin",
+          "data/vision_calibration/d435_access_20261109_182726/color.png",
+          "data/vision_calibration/d435_access_20261109_182726/depth.bin",
+          "data/vision_calibration/d435_access_20261109_182726/depth_uint16.png",
+          "data/vision_calibration/d435_access_20261109_182726/driver.log",
+          "data/vision_calibration/d435_access_20261109_182726/probe.json",
+          "data/vision_calibration/d435_dds_20261109_200102/color.bin",
+          "data/vision_calibration/d435_dds_20261109_200102/color.png",
+          "data/vision_calibration/d435_dds_20261109_200102/dds_workstation.xml",
+          "data/vision_calibration/d435_dds_20261109_200102/depth.bin",
+          "data/vision_calibration/d435_dds_20261109_200102/depth_uint16.png",
+          "data/vision_calibration/d435_dds_20261109_200102/packets.txt",
+          "data/vision_calibration/d435_dds_20261109_200102/remote_driver.log",
+          "data/vision_calibration/d435_dds_20261109_200102/subscriber.json",
+          "data/vision_calibration/d435_dds_20261109_200102/subscriber.log"
+        ]
+      },
+      "removed_task_artifacts": {
+        "data/vision_calibration/live_check_20261110_162316_n19": {
+          "files": 20,
+          "bytes": 8146600,
+          "manifest_sha256": "b27f39a1fd0b8643bc8d0e6d8af9fdac22c6c821c1d687f5c6a11797540a37e1"
+        },
+        "data/vision_calibration/live_check_20261110_162316_n19_summary.json": {
+          "files": 1,
+          "bytes": 6567,
+          "manifest_sha256": "d5c2e253e1826e73602183f6da117a6ce5479f8ac6220c574aa1213cae0ca678"
+        },
+        "data/vision_calibration/urdf_extrinsics_check_20261110": {
+          "files": 4,
+          "bytes": 15794613,
+          "manifest_sha256": "e87f415ea445c6b46bd91267f9bc902c308f698b9d390f401629bb6a78aa9b3d"
+        },
+        "data/vision_calibration/arm_check_20261110": {
+          "files": 69,
+          "bytes": 15822411,
+          "manifest_sha256": "5b92593b0b66af7eeb5d8ef4ed69bec7b267d6bf1a5c2bedc2bdffd1bebc4981"
+        }
+      },
+      "removed_docs_sha256": {
+        "docs/camera_extrinsic_calibration_options.md": "0d53558350e70b649c02fe624eefcbb8d98a1cce33a42cecc75d60385552f22a",
+        "docs/extrinsics_ui.md": "4d8dd7322aebcba517d0e2fbe9ac61c41296f10789e8ac58952149c4a15e0b3d"
+      },
+      "rewritten_docs": [
+        "docs/calibration_workflow.md (now the record of the method used)",
+        "README.md"
+      ],
+      "kept_test_fixtures": [
+        "data/vision_calibration/board_diagnostic_20261109_210647",
+        "data/vision_calibration/extrinsics_Q12_setup_20261109_214759"
+      ]
+    },
+    {
+      "date": "2026-11-11",
+      "change": "task_brief_removed",
+      "approved_by": "user",
+      "detail": "User removed the task contract document after the roadmap was settled. Scope, permissions and results are carried by the conversation, README.md and docs/calibration_workflow.md.",
+      "removed_docs_sha256": {
+        "docs/task_brief.md": "96117d64da4bc5c8423910f35950330a04970b27475cb20a6321be9d5c4888fc"
+      }
+    },
+    {
+      "date": "2026-11-11",
+      "change": "roadmap_renamed_and_overlapping_research_removed",
+      "approved_by": "user",
+      "detail": "Renamed the roadmap to docs/vision_deployment_plan.md, dropped its task-side background/reference section, and removed the early camera-scenario research note and the CAPTRA figure that was only referenced there.",
+      "renamed": {
+        "docs/vision_deployment_plan_20261028.md": "docs/vision_deployment_plan.md"
+      },
+      "removed_sha256": {
+        "docs/camera_scenario_scan.md": "0361a36b128856a7b49f019df3d269c1978e8143ef42fb61af0ccc436c047e74",
+        "docs/assets/captra_real_scissors_fig3.jpeg": "fa1e118250fc0af47e07d9037a9dad3c0d98a791f07a8772000a33227e2ae92b"
+      }
+    },
+    {
+      "date": "2026-11-11",
+      "change": "object_recognition_options_restored",
+      "approved_by": "user",
+      "detail": "Restored the object-recognition algorithm options note as the current candidate reference for stage B.",
+      "source": {
+        "repository": "regrind-vision-deploy",
+        "commit": "4e15657",
+        "path": "REGRIND/docs/vision-deploy/object_recognition_algorithm_options.md"
+      },
+      "sha256": "8a09fb73433d59f1e4618d0427d7a563293209d0b1f0ab58d9818619c07a58d3"
+    },
+    {
+      "date": "2026-11-11",
+      "change": "captra_record_merged_into_roadmap",
+      "approved_by": "user",
+      "detail": "Merged the CAPTRA asset record into docs/vision_deployment_plan.md and removed the separate file.",
+      "removed_sha256": {
+        "docs/object_recognition/captra_assets.md": "0d7b5470cc524f9ef0ed236a2fb7ac51ed4afd5c7cfcb2923465e8df9cd2b0ea"
+      }
+    },
+    {
+      "date": "2026-11-11",
+      "change": "baseline_doc_merged_into_roadmap",
+      "approved_by": "user",
+      "detail": "The deployment roadmap now carries the stage-B plan and evaluation criteria, so the separate baseline note was removed.",
+      "removed_sha256": {
+        "docs/object_recognition/baseline.md": "a909acc8590d7059311330a063809470c7b9d90242c3c3d6db2e4913fc95a498"
+      }
     }
   ]
 }

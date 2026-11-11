@@ -1,13 +1,14 @@
 # 相机与标定配置
 
-本目录用版本控制保存相机、标定板和 DDS 配置。原始图像、session 和诊断记录放在本仓库的 `data/vision_calibration/`，只保存在本机，不入 git。两者都不随 package 分发，程序也不会自动加载，使用时须显式给出路径。凭据不放进仓库；本目录含内网地址和设备序列号，创建远端或公开发布前须复核。
+本目录用版本控制保存相机、标定板和 DDS 配置，以及已签收的相机外参。它们不随 package 分发，程序也不会自动加载，使用时须显式给出路径。凭据不放进仓库；本目录含内网地址和设备序列号，创建远端或公开发布前须复核。
 
 | 路径 | 状态 | 说明 |
 | --- | --- | --- |
 | [boards/dfoptix_q12-290-20.json](boards/dfoptix_q12-290-20.json) | 当前 | DFOPTIX Q12-290-20 普通棋盘：12×9 方格、11×8 内角点，单格 20 mm 经用户确认（量具和不确定度未记录）；黑白格区域 240×180 mm，整板 290×230 mm，厚 3.2 mm。取代旧记录 `Q12-12x9`（已删除，hash 见 provenance.json），数值不变。 |
-| [cameras/d435/fastdds_workstation.xml](cameras/d435/fastdds_workstation.xml) | 当前，使用前复核 | workstation 接收 Jetson D435 话题的 Fast DDS profile。2026-11-09 在 workstation 6.6.7.94 与 Jetson 6.6.7.100 之间验证收流，与记录 `data/vision_calibration/d435_dds_20261109_200102/dds_workstation.xml` 逐字节相同。地址或网卡变化时先更新再用。 |
+| [cameras/d435/fastdds_workstation.xml](cameras/d435/fastdds_workstation.xml) | 当前，使用前复核 | workstation 接收 Jetson D435 话题的 Fast DDS profile。2026-11-09 在 workstation 6.6.7.94 与 Jetson 6.6.7.100 之间验证收流；2026-11-10 的标定也用它接收。地址或网卡变化时先更新再用。 |
+| [cameras/d435/extrinsics_base_link_20261110.json](cameras/d435/extrinsics_base_link_20261110.json) | 当前，用户签收，限定范围 | 头部 D435 外参：`base_link` ← `d435_color_optical_frame`，另附 `base_link` ← `d435_link`。由厂商 URDF、Intel D435 机械模型和驱动出厂 TF 拼接而成，经两个静态姿态的双臂叠图和原生深度核对（修正量 4.3 mm / 0.58° 和 5.1 mm / 0.53°，均未采用）。仅适用于头部固定、静态使用，没有验证时间同步。方法见[头部 D435 相机标定](../docs/calibration/d435_head.md)。 |
 
-2026-11-09 验证收流时，两端使用 `RMW_IMPLEMENTATION=rmw_fastrtps_cpp`、`ROS_DOMAIN_ID=0`。在 workstation 上使用上述 profile：
+收流时两端使用 `RMW_IMPLEMENTATION=rmw_fastrtps_cpp`、`ROS_DOMAIN_ID=0`。在 workstation 上使用上述 profile：
 
 ```bash
 source /opt/ros/humble/setup.bash

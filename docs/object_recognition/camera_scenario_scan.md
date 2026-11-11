@@ -1,6 +1,6 @@
 # 相机场景候选技术栈扫描（2026-10-16）
 
-> 本文是迁入的历史调研，保留原有核实状态与限制，不代表当前硬件选型或性能已验证；后续 D435 方案背景见[视觉部署路线图](vision_deployment_plan_20261028.md)。
+> 本文是迁入的历史调研，保留原有核实状态与限制，不代表当前硬件选型或性能已验证；后续 D435 方案背景见[部署与感知路线](../vision_deployment_plan.md)。
 
 ## Summary
 
@@ -104,8 +104,8 @@ articulated 角度估计：
 
 ## Gaps
 
-1. **无法联网核实**：所有 license（尤其 FoundationPose 的 NVIDIA Source Code License 条款）、实时帧率数字、代码仓库当前状态、部分 arXiv 编号（ScrewNet、ArtGS 标注为待核实）均需人工复核。
+1. **许可与数字需逐项核实**：本文可联网核查，但撰写时未逐项验证所有 license（尤其 FoundationPose 的 NVIDIA Source Code License 条款）、实时帧率数字、代码仓库当前状态和部分 arXiv 编号（ScrewNet、ArtGS 标注为待核实），引用前需人工复核。
 2. **2025–2026 最新文献缺失**：训练知识截止后新出现的 articulated 跟踪、render-and-compare 后续工作未覆盖；建议后续用关键词 "articulated object pose tracking 2025"、"category-level articulation estimation 2025" 补检索。
 3. **Wuji Hand 2 触觉能力未确认**：多模态融合条目的可行性取决于该手是否具备指尖触觉/力反馈，需查硬件规格。
 4. **真机剪刀的 depth 失效程度无量化数据**：建议尽早做一次性实验（ZED/RealSense 对实物剪刀刃面的 depth 完整率统计），该数据直接决定主线是否需要单目 RGB 备选栈。
-5. 下一步建议：恢复 web_search 后对本报告所有【待核实】项逐条复核，并补 2025–2026 文献。
+5. 下一步建议：对本报告所有【待核实】项逐条联网复核，并补 2025–2026 文献。

@@ -28,6 +28,14 @@ def parser():
     capture.add_argument("--depth-unit-m", type=float, required=True, help="Confirmed metres per native/aligned uint16 unit; not assumed from encoding")
     capture.add_argument("--camera-serial", required=True, help="Operator-confirmed physical serial; not verified by this subscriber")
     capture.add_argument("--profile-record", required=True, help="Reference to operator-confirmed device/profile/driver parameter record")
+    snapshot = commands.add_parser("rgbd-snapshot", help="Finite RGB/native-depth snapshot from an already running driver")
+    snapshot.add_argument("--output", required=True, help="New directory; never overwritten")
+    snapshot.add_argument("--subscribe", action="store_true", help="Explicit camera-only I/O authorization")
+    snapshot.add_argument("--frames", type=int, required=True, help="1–300 frames per stream")
+    snapshot.add_argument("--timeout-s", type=float, required=True, help="Finite timeout in (0,600] seconds")
+    snapshot.add_argument("--depth-unit-m", type=float, required=True, help="Confirmed metres per raw depth unit")
+    snapshot.add_argument("--camera-serial", required=True)
+    snapshot.add_argument("--profile-record", required=True)
     fit = commands.add_parser("intrinsics", help="Fit a raw-color Brown5 candidate and evaluate predeclared heldout images")
     fit.add_argument("--config", required=True)
     fit.add_argument("--manifest", required=True)
@@ -46,6 +54,23 @@ def parser():
     reference.add_argument("--out-dir", required=True, help="One exclusive-create sample_id.json per state; never overwrite")
     reference.add_argument("--confirm-settled-same-pose", action="store_true",
                            help="Confirm EVERY state was read while settled at the same pose as its frozen image")
+    arm = commands.add_parser("arm-check", help="Offline arm overlay/native-depth extrinsic diagnostic; never approves calibration")
+    arm.add_argument("--urdf", required=True, help="Vendor .urdf or .zip read in place")
+    arm.add_argument("--urdf-member")
+    arm.add_argument("--mesh-root", help="Required with .urdf; package-relative STL root")
+    arm.add_argument("--base", required=True)
+    arm.add_argument("--arm-chain", action="append", required=True, help="SIDE=END_LINK; exactly seven angular joints")
+    arm.add_argument("--links", required=True, help="Explicit comma-separated render/compare links; no implicit gripper")
+    arm.add_argument("--states", required=True, help="Text lines: pose_id followed by Tianji state line")
+    arm.add_argument("--pose", action="append", required=True, help="POSE_ID=SNAPSHOT_DIR")
+    arm.add_argument("--camera-pose", required=True, help="JSON T_base_color in metres")
+    arm.add_argument("--output", required=True, help="New directory; never overwritten")
+    arm.add_argument("--confirm-static-same-pose", action="store_true", help="Confirm static camera/robot and same-pose states for EVERY snapshot")
+    arm.add_argument("--roi-dilation-px", type=int, default=25)
+    arm.add_argument("--icp-gates-mm", default="60,30,15", help="Decreasing correspondence gates, default 60,30,15 mm")
+    arm.add_argument("--surface-sample-spacing-mm", type=float, default=2.0)
+    arm.add_argument("--max-depth-m", type=float, default=2.0)
+    arm.add_argument("--min-points-per-group", type=int, default=300)
     return root
 
 
@@ -82,6 +107,14 @@ def main(argv=None):
             from .capture import run_capture
             run_capture(args, provenance(args.config))
             print(f"Raw session saved to {args.output}; physical calibration remains unverified")
+        elif args.command == "arm-check":
+            from .arm_check import run_arm_check
+            run_arm_check(args)
+            print(f"Arm diagnostic saved to {args.output}; candidate not approved")
+        elif args.command == "rgbd-snapshot":
+            from .rgbd_snapshot import run_snapshot
+            run_snapshot(args)
+            print(f"Diagnostic snapshot saved to {args.output}; not calibration")
         elif args.command == "intrinsics":
             config = load_config(args.config, "board")
             from .offline import intrinsics
